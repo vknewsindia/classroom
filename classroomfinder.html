@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            color: #333;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 8px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #roomDetails {
+            margin-top: 20px;
+            text-align: center;
+            
+        }
+
+        #roomDetails img {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Classroom Search</h1>
+    <form id="searchForm">
+        <label for="roomNumber">Select Room Number:</label>
+        <select id="roomNumber">
+            <option value="">Select Room</option>
+            <option value="1001">1001</option>
+            <option value="1002">1002</option>
+            <option value="1003">1003</option>
+        </select>
+        <button type="button" onclick="searchRoom()">Search</button>
+    </form>
+    <div id="roomDetails" style="display: none;">
+        <!-- Room details will be displayed here -->
+    </div>
+
+    <script>
+        function searchRoom() {
+            var roomNumber = document.getElementById("roomNumber").value;
+            var roomDetails = roomsData[roomNumber];
+            if (roomDetails) {
+                displayRoomDetails(roomDetails);
+            } else {
+                alert("Room details not found.");
+            }
+        }
+
+        function displayRoomDetails(details) {
+            var roomDetailsDiv = document.getElementById("roomDetails");
+            roomDetailsDiv.innerHTML = `
+                <h2>Room Details</h2>
+                <p><strong>Block Name:</strong> ${details.blockName}</p>
+                <p><strong>Floor:</strong> ${details.floor}</p>
+                <p><strong>Direction:</strong> ${details.direction}</p>
+                <p><strong>Room Type:</strong> ${details.roomType}</p>
+                <p><strong>Department:</strong> ${details.department}</p>
+                <img src="${details.photoURL}" alt="Room Photo" width="300">
+            `;
+            roomDetailsDiv.style.display = "block";
+        }
+
+        var roomsData = {
+            "1001": {
+                blockName: "Main Building",
+                floor: "1st Floor",
+                direction: "North",
+                roomType: "Lecture Hall",
+                department: "Computer Science",
+                photoURL: "path/to/photo_1001.jpg"
+            },
+            "1002": {
+                blockName: "Main Building",
+                floor: "1st Floor",
+                direction: "South",
+                roomType: "Lab",
+                department: "Physics",
+                photoURL: "path/to/photo_1002.jpg"
+            },
+            "1003": {
+                blockName: "Main Building",
+                floor: "2nd Floor",
+                direction: "East",
+                roomType: "Lecture Hall",
+                department: "Mathematics",
+                photoURL: "path/to/photo_1003.jpg"
+            }
+        };
+    </script>
+</body>
+</html>
